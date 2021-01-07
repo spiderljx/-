@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>   
+    <div id = 'btn1'>按钮</div>
+    <img id = 'imag1' src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3363295869,2467511306&fm=26&gp=0.jpg" alt="">
+    <img id = 'imag2' src="https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1819216937,2118754409&fm=26&gp=0.jpg" alt="">
+
+
+    <div style="width:100px;height: 200px; background-color:chartreuse;" ></div>
+    <script>
+        var btn1 = document.getElementById('btn1');
+        var img1 = document.getElementById('imag1');
+        btn1.onclick = function()
+        {
+            img1.style.height = '200px'
+        }
+        var array = document.querySelectorAll('img');
+        console.log(array)
+
+        
+
+
+        window.onkeydown = function (e)
+        {
+            console.log(e)
+            switch(e.key)
+            {
+                case 'h':
+                    console.log('hhhhhh');
+                break;
+                case 'Escape':
+                    console.log('esc');
+                break;
+            }
+        }
+        
+    </script>
+</body>
+</html>

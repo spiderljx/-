@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id = 'btn1'>按钮</div>
+    <div id = 'text'></div>
+
+
+    <script>
+        var names = ['阿帅','小钱','小邓','小慈','小李','小张']
+        var length = names.length;
+
+        var index =  0;
+
+         function easeInQuad(pos){
+                return Math.pow(pos, 2);
+            }
+
+        document.getElementById('btn1').onclick = function()
+        {
+            var nowCount = 0;
+            var count = 300;
+
+            var timer = 2000;
+            var pertime = 80;
+            var time = 0;
+
+        var jsq = setInterval(()=>{
+            time +=pertime;
+            index = index +1;
+            if(index >= length)
+            {
+                index = 0;
+            }
+            document.getElementById('text').innerHTML = names[index]
+            if(time >= timer)
+            {
+                clearInterval(jsq);
+                var index2 =  Math.floor(Math.random() *length);
+                document.getElementById('text').innerHTML = names[index2]
+            }
+
+            },pertime);
+        }
+
+
+
+    </script>
+</body>
+</html>
