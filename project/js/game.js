@@ -23,11 +23,14 @@ menubg.onload = ()=>{
             var gamebg = document.createElement('img')
             gamebg.src = '../imag/game_bg.jpg'
             gamebg.onload = ()=>{
-                canvas.drawImage(gamebg,0,0,320,480)
+               // canvas.drawImage(gamebg,0,0,320,480)
                 state = 1;
-
-                new GameLogic();
-
+                console.log('test');
+            //    new GameLogic();
+                //canvas.clearRect(0,0,320,480)
+                var im = document.createElement("img")
+                im.src = '../imag/progress.png'
+                canvas.drawImage(im,100,100)
 
 
             }

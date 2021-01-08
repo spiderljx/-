@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id = 'mycanvas'width = 500 height="500" style="background-color: burlywood;"></canvas>
+
+    <script>
+        var mycanvas = document.getElementById('mycanvas')
+        var canvas2d = mycanvas.getContext('2d');
+
+        var img1 = document.createElement('img')
+        img1.src ='../img/DMMban.png'
+
+        var imgwidth = 40
+        var imgheight = 65
+        var imgindexX = 0
+        var imgindexY = 0
+        // 0 >
+        // 1 <
+        // 2 上
+        // 3 下
+        var state = 2
+
+        var x =0
+        var y = 0
+        img1.onload = ()=>{
+
+            setInterval(()=>{
+
+                switch(state)
+                {
+                    case 0:
+                        canvas2d.clearRect(0,0,500,500);
+                        canvas2d.drawImage(img1,imgwidth * imgindexX,2 * imgheight,40,65,x,y,40,65);
+                        imgindexX++;
+                        x = x+4;
+                        if(x + imgwidth >= 500)
+                        {
+                            state = 1;
+                        }
+                        if(imgindexX >3)
+                        {
+                            imgindexX = 0;
+                        }
+                        break;
+                    case 1:
+                        canvas2d.clearRect(0,0,500,500);
+                        canvas2d.drawImage(img1,imgwidth * imgindexX,1 * imgheight,40,65,x,y,40,65);
+                        imgindexX++;
+                        x = x-4;
+                        if(x <= 0)
+                        {
+                            state = 0;
+                        }
+                        if(imgindexX >3)
+                        {
+                            imgindexX = 0;
+                        }
+                        break;
+                    case 2:
+                        canvas2d.clearRect(0,0,500,500);
+                        canvas2d.drawImage(img1,imgwidth * imgindexX,3 * imgheight,40,65,x,y,40,65);
+                        imgindexX++;
+                        y = y-4;
+                        if(y <=0)
+                        {
+                            state = 3;
+                        }
+                        if(imgindexX >3)
+                        {
+                            imgindexX = 0;
+                        }
+                        break;
+                    case 3:   
+                        y = y+4;
+                        if(y+imgheight >= 500)
+                        {
+                            state = 2;
+                        }                    
+                        canvas2d.clearRect(0,0,500,500);
+                        canvas2d.drawImage(img1,imgwidth * imgindexX,0 * imgheight,40,65,x,y,40,65);
+                        imgindexX++;
+                        if(imgindexX >3)
+                        {
+                            imgindexX = 0;
+                        }
+                        break;
+                }
+
+            },200)
+        }
+
+        window.onkeydown = (e) =>{
+            console.log(e)
+            switch(e.code)
+            {
+                case 'KeyD':
+                    state = 0;
+                    break;
+                case 'KeyA':
+                    state = 1;
+                    break;
+                case 'KeyW':
+                    state = 2;
+                    break;
+                case 'KeyS':
+                    state = 3;
+                    break;
+            }
+
+        }
+    </script>
+
+</body>
+</html>

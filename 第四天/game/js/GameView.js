@@ -1,0 +1,12 @@
+class GameView
+{
+    constructor()
+    {
+
+    }
+    
+    run()
+    {
+
+    }
+}

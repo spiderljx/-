@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id = 'gamecanvas' style="background-color: burlywood;"></canvas>
+    <div>开始游戏</div>
+    <script src="./js/Game.js"></script>
+    <script src="./js/GameView.js"></script>
+    <script>  
+    var game = new Game(500,400);
+    document.querySelector('div').onclick = ()=>{
+        game.Start();
+    }
+    </script>
+</body>
+</html>
