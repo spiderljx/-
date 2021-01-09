@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas{
+      border: 1px solid gray;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="mycanvas"></canvas>
+  <div id="mydiv" style="width: 100px;
+  height: 30px;
+  border: 2px solid orangered;
+  color: orangered;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 30px;
+  border-radius: 4px;">开始游戏</div>
+  <script src="./js/GameMan.js"></script>
+  <script src="./js/GameMap.js"></script>
+  <script src="./js/GameView.js"></script>
+  <script src="./js/Game.js"></script>
+  <script>
+    /* 
+      1.游戏框架:建立好js文件(Game.js)，初始化好画布
+      2.创建游戏视图:GameView.js
+      3.在视图文件里面绘制 游戏地图
+      4.绘制小矮人
+    */
+    var game = new Game(500,500);
+    document.getElementById('mydiv').onclick = function () {
+      // 开始游戏
+      game.start();
+    }
+  </script>
+</body>
+</html>

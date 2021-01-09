@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas{
+      border: 1px solid gray;
+    }
+  </style>
+</head>
+<body>
+  <!-- <img src="../img/wolf/h0.png" alt=""> -->
+  <!-- 
+    1.游戏框架：初始化画布,创建视图:GameView.js
+    2.绘制地图:GameMap.js
+    3.绘制灰太狼:wolf.js
+    4.狼的打击
+   -->
+  <canvas id="mycanvas"></canvas>
+
+  <script src="./js/Wolf.js"></script>
+  <script src="./js/GameMap.js"></script>
+  <script src="./js/GameView.js"></script>
+  <script src="./js/Game.js"></script>
+  <script>
+    var game = new Game(480,800);
+    // 开始游戏
+    game.start();
+  </script>
+</body>
+</html>

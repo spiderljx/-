@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas{
+      border: 1px solid gray;
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    1.游戏框架：初始化画布,创建游戏视图：GameView.js
+    2.绘制 游戏地图：GameMap.js
+    3.绘制 小矮人：GameMan.js
+    4.键盘按下事件
+   -->
+   <!-- <img src="./img/DMMban.png" alt=""> -->
+  <canvas id="mycanvas"></canvas>
+
+  <div id="mydiv" style="width: 100px;
+  height: 30px;
+  border: 2px solid orangered;
+  color: orangered;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 30px;
+  border-radius: 4px;">开始游戏</div>
+
+  <script src="./js/GameMan.js"></script>
+  <script src="./js/GameMap.js"></script>
+  <script src="./js/GameView.js"></script>
+  <script src="./js/Game.js"></script>
+  <script>
+    var game = new Game(500,500);
+    document.getElementById('mydiv').onclick = function () {
+      // 开始游戏
+      game.start();
+    }
+  </script>
+</body>
+</html>
