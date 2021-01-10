@@ -26,11 +26,7 @@ menubg.onload = ()=>{
                // canvas.drawImage(gamebg,0,0,320,480)
                 state = 1;
                 console.log('test');
-            //    new GameLogic();
-                //canvas.clearRect(0,0,320,480)
-                var im = document.createElement("img")
-                im.src = '../imag/progress.png'
-                canvas.drawImage(im,100,100)
+                new GameLogic();
 
 
             }
@@ -61,7 +57,7 @@ class GameLogic
 
         // test
         var wolf1 = new Wolf(0,3);
-
+        wolf1.Show(0,0,40,65);
 
     }
 
@@ -97,7 +93,9 @@ class Wolf
         this.stayTime = staytime
 
         // 初始化资源
-        this.loadRes();
+        this.ShowHideImges = [this.loadImg('0'),this.loadImg('1'),
+        this.loadImg('2'),this.loadImg('3'),this.loadImg('4'),this.loadImg('5')]
+        this.HitImages = [this.loadImg('6'),this.loadImg('7'),this.loadImg('8'),this.loadImg('9')]
     }
 
     loadImg(imgname)
@@ -118,44 +116,35 @@ class Wolf
         return img
     }
 
-    loadRes()
+    Show(x,y)
     {
-        this.ShowHideImges = [this.loadImg('0'),this.loadImg('1'),
-                            this.loadImg('2'),this.loadImg('3'),this.loadImg('4'),this.loadImg('5')]
-        this.HitImages = [this.loadImg('6'),this.loadImg('7'),this.loadImg('8'),this.loadImg('9')]
-
-    }
-
-    Show(x,y,width,height)
-    {
-
-        canvas.clearRect(0,0,320,480)
-        var img = document.createElement("img")
-        img.src = '../imag/progress.png'
-        canvas.drawImage(img,x,y,200,200)
-
-
-/*
         var index = 0;
         this.showTimer = setInterval(()=>{
-            this.ShowHideImges[index].onload=function(){
+            canvas.clearRect(0,0,320,480)
+            canvas.drawImage(this.ShowHideImges[index],10,10,108,101)
+            index++;
+            if(index >= this.ShowHideImges.length)
+            {
+                clearInterval(this.showTimer)
                 
-                canvas.drawImage(ShowHideImges[index],x,y,width,height)
-                index++;
-                if(index >= this.ShowHideImges.length)
-                {
-                    clearInterval(this.showTimer)
-                }
-                console.log(index)          
+                this.Hide();
             }
-            console.log('show');
-        },500);
-        */
-        
+        },200);          
     }
 
     Hide()
     {
+        var index = this.ShowHideImges.length - 1;
+        this.hidTimer = setInterval(()=>{
+            canvas.clearRect(0,0,320,480)
+            canvas.drawImage(this.ShowHideImges[index],10,10,108,101)
+            index--;
+            if(index < 0)
+            {
+                clearInterval(this.hidTimer)
+                canvas.clearRect(0,0,320,480)
+            }
+        },200); 
 
     }
 
