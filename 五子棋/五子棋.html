@@ -5,26 +5,17 @@
 	<title>五子棋游戏</title>
 </head>
 <body onload="startLoad()" style="padding:0px;margin:0px">
-    <canvas width="1024" id="canvas" onmousedown="play(event)" height="768">
+    <canvas width="2048" id="canvas" onmousedown="play(event)" height="2048">
+
     </canvas>
 </body>
 <script>
-	/**五子棋
- * 思路：
- * 1.棋盘设置：使用HTML5的canvas标签绘制整个棋盘
- * 2.点击事件：当页面被点击时，获取点击的x,y像素点,根据此像素点进行判断，再在合适位置绘制黑白棋子，黑子棋子均是使用canvas绘制的
- * 3.保存落子记录：将数据存入一个二维数组，x和y表是落子坐标，1为白棋，2为黑棋，0代表此处无棋子，只有没有棋子的才能落子
- * 4.判断输赢：每次落子后以此坐标分别向左右，上下，右下，右上进行判断，设参数count，遇到同色棋子+1，遇到空格或不同色棋子终止，当count=5时，游戏结束
- */
-/**全局参数初始化
- * 
- */
 
-var paddingX = 180;   // 棋盘相对于左边的距离
-var paddingY = 80;    // 相对于上边的据库
-var chessRadius = 15;  // 旗子的半径
-var boxsize = 50;  // 方格的大小
-var checkerboard = 15; // 棋盘的大小
+var paddingX = 10;   // 棋盘相对于左边的距离
+var paddingY = 10;    // 相对于上边的据库
+var chessRadius = 20;  // 旗子的半径
+var boxsize = 40;  // 方格的大小
+var checkerboard = 30; // 棋盘的大小
 
 var canvas; //html5画布
 var context;
@@ -66,30 +57,6 @@ function drawRect() {
   context.fillStyle = '#23FFC1';
   context.fillRect(paddingX -10, paddingY - 10, boxsize * (checkerboard-1) + 20, boxsize * (checkerboard-1) + 20);
 
-  // var bg = document.createElement('img');
-  // bg.src = './imags/gamebg.jpg';
-  // bg.onload = ()=>
-  // {
-  //   context.drawImage(bg,0,0,);
-  // }
-
-
-  //标题
-  context.fillStyle = '#FF9000';
-  context.font = '40px 微软雅黑';
-  context.fontsize = '100'
-  context.strokeText('欢乐五子棋', paddingX + boxsize * checkerboard, 100);
-  //新游戏
-  context.strokeRect(paddingX + boxsize * checkerboard + 30, 140, 120, 30);
-  context.fillStyle = '#00f';
-  context.font = '25px Arial';
-  context.strokeText('重新开始', paddingX + boxsize * checkerboard + 40, 165);
-
-  // 棋盘 高度 宽度  560
-  // 起始位置  180,80）  
-  // 每个格子的大小   40 * 40
-  //
-
   //棋盘纵横线
   for (var i = 0; i < checkerboard; i++) {
     context.beginPath();
@@ -117,9 +84,8 @@ function play(e) { //鼠标点击时发生
   var e=e||event;
   var px = e.clientX -(paddingX - 20);
   var py = e.clientY - (paddingY - 20);
-  var x = parseInt(px / 40);
-  var y = parseInt(py / 40);
-  isNewGame(e.clientX, e.clientY); //是否点击了newgame
+  var x = parseInt(px / boxsize);
+  var y = parseInt(py / boxsize);
   if (px < 0 || py < 0 || x > checkerboard -1 || y > checkerboard -1 || chessData[x][y] != 0) { //鼠标点击棋盘外的区域不响应
     return;
   }
@@ -140,12 +106,7 @@ function doCheck(x, y) {
   drawChess(color, x, y);
 }
 
-/** 落子
- * @param  {[type]} turn [description]
- * @param  {[type]} x    [description]
- * @param  {[type]} y    [description]
- * @return {[type]}      [description]
- */
+
  function drawChess(color, x, y) { //参数为，棋（1为白棋，2为黑棋），数组位置
   if (x >= 0 && x < checkerboard && y >= 0 && y < checkerboard) {
     if (color == "white") {
@@ -164,9 +125,6 @@ function doCheck(x, y) {
   }
 }
 
-/**绘制棋子，每次绘制棋子的时候刷新cookie信息
- * 
- */
  function chess(color, x, y) {
   context.fillStyle = color; //绘制黑棋
   context.beginPath();
@@ -183,20 +141,6 @@ function doCheck(x, y) {
 }
 
 
-/**新游戏按钮
- * 
- */
-function isNewGame(x, y) {
-  if (x> paddingX + boxsize * checkerboard + 30 && x< 910 && y < 170 && y > 140) {
-    if (confirm("开启一局新游戏？")) {
-      location.reload();
-    }
-  }
-}
-/**判断此局游戏是否已有结果
- * 每次落子判断游戏是否胜利
- *
- */
 function isWin(color, x, y) {
   console.log("判断" + color + "(" + x + "," + y + ")是否胜利");
   var temp = 2; //默认为黑色
@@ -327,11 +271,10 @@ function rbCount(temp, x, y) {
   }
   success(line[0], line[1], line[2], line[3], temp, --count);
 }
-/**判断是否胜利及胜利之后的操作
- * @param  {[type]} turn  [description]
- * @param  {[type]} count [description]
- * @return {[type]}       [description]
- */
+
+
+
+
 function success(a, b, c, d, temp, count) {
   if (count == 5) { //因为落子点重复计算了一次
     console.log("此局游戏结束啦");
@@ -345,7 +288,6 @@ function success(a, b, c, d, temp, count) {
     context.closePath();
     context.stroke();
 
-
     winner = "黑棋胜利!";
     if (temp == 1) {
       winner = "白棋胜利!";
@@ -353,22 +295,18 @@ function success(a, b, c, d, temp, count) {
     alert(winner);
   }
 }
-
-
-
-
-// /**
-//  * 禁止页面滚动事件
-//  * @return {[type]} [description]
-//  */
-// var pageScroll = 0;
-// window.onscroll = function() {
-//   pageScroll++;
-//   scrollTo(0, 0);
-//   if (pageScroll > 100) { //每当玩家滚动页面滚动条100次提醒
-//     pageScroll = 0;
-//   }
-// }
+/**
+ * 禁止页面滚动事件
+ * @return {[type]} [description]
+ */
+var pageScroll = 0;
+window.onscroll = function() {
+  pageScroll++;
+  scrollTo(0, 0);
+  if (pageScroll > 100) { //每当玩家滚动页面滚动条100次提醒
+    pageScroll = 0;
+  }
+}
 </script>
   </html>
 
